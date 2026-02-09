@@ -1,0 +1,32 @@
+# =====================================
+# IZINKAN AKSES FILE PENTING (GSC, PHP, SITEMAP)
+# =====================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Izinkan file Google Search Console
+  RewriteRule ^google[a-zA-Z0-9]+\.html$ - [L]
+
+  # Izinkan sitemap
+  RewriteRule ^sitemap\.xml$ - [L]
+
+  # Izinkan file PHP
+  RewriteRule \.php$ - [L]
+</IfModule>
+
+# =====================================
+# PASTIKAN MIME TYPE BENAR
+# =====================================
+<IfModule mod_mime.c>
+  AddType application/xml .xml
+  AddType application/php .php
+</IfModule>
+
+# =====================================
+# KEAMANAN DASAR (TIDAK MENGGANGGU GSC)
+# =====================================
+<FilesMatch "\.(htaccess|htpasswd|env|ini|log|conf)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
